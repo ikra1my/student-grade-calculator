@@ -1,14 +1,39 @@
 # Student Grade Calculator
 
-algorithm = float(input("Enter your Algorithm grade: "))
-analysis = float(input("Enter your Analysis grade: "))
-algebra = float(input("Enter your Algebra grade: "))
+def get_grade(subject):
+    while True:
+        try:
+            grade = float(input(f"Enter your {subject} grade (0-20): "))
 
-average = (algorithm + analysis + algebra) / 3
+            if 0 <= grade <= 20:
+                return grade
 
-print("\nYour average is:", round(average, 2))
+            print("Please enter a grade between 0 and 20.")
 
-if average >= 10:
-    print("Status: Passed ✅")
+        except ValueError:
+            print("Please enter a valid number.")
+
+
+algorithm = get_grade("Algorithm")
+analysis = get_grade("Analysis")
+algebra = get_grade("Algebra")
+
+average = (
+    algorithm * 5 +
+    analysis * 4 +
+    algebra * 2
+) / 11
+
+print("\n--- Results ---")
+print("Weighted average:", round(average, 2))
+
+if average >= 16:
+    print("Mention: Excellent 🌟")
+elif average >= 14:
+    print("Mention: Very Good")
+elif average >= 12:
+    print("Mention: Good")
+elif average >= 10:
+    print("Mention: Pass")
 else:
     print("Status: Failed ❌")
